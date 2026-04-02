@@ -1,37 +1,22 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ρύθμιση Ημερομηνίας
-    const dateField = document.getElementById('current-date');
+    // Αυτόματη Ημερομηνία & Ώρα
     const now = new Date();
-    
-    const formattedDate = now.toLocaleDateString('el-GR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-    if (dateField) dateField.innerText = formattedDate;
-
-    // 2. Ρύθμιση Ώρας Άφιξης
-    const arrivalField = document.getElementById('arrival-time');
-    const formattedTime = now.toLocaleTimeString('el-GR', {
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-    if (arrivalField) arrivalField.innerText = formattedTime;
-
-    console.log("G&B Experts App: Ημερομηνία και Ώρα Άφιξης καταγράφηκαν.");
+    document.getElementById('current-date').innerText = now.toLocaleDateString('el-GR');
+    document.getElementById('arrival-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
 });
 
-/**
- * Αυτή η συνάρτηση θα καλείται στο μέλλον 
- * όταν ο χρήστης ολοκληρώνει την υπογραφή.
- */
-function setDepartureTime() {
-    const departureField = document.getElementById('departure-time');
-    const now = new Date();
-    const formattedTime = now.toLocaleTimeString('el-GR', {
-        hour: '2-digit',
-        minute: '2-digit'
+// Λογική για την αλλαγή χρώματος στα κουμπιά
+function toggleBtn(btn, type) {
+    const parent = btn.parentElement;
+    const buttons = parent.querySelectorAll('.btn-toggle');
+    
+    buttons.forEach(b => {
+        b.classList.remove('active-yes', 'active-no');
     });
-    if (departureField) departureField.innerText = formattedTime;
+
+    if (type === 'yes') {
+        btn.classList.add('active-yes');
+    } else {
+        btn.classList.add('active-no');
+    }
 }
