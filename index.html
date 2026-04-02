@@ -5,39 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G&B Experts Checklist</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <header>
         <div class="header-container">
-            <div class="logo-gb">
-                <img src="assets/images/G&B-LOGO.svg" alt="G&B Experts">
-            </div>
-            
-            <div class="header-text">
-                BARISTA QUALITY - CHECK LIST FORM
-            </div>
-
-            <div class="logo-miscela">
-                <img src="assets/images/MISCELA-DORO-LOGO.svg" alt="Miscela d'Oro">
-            </div>
+            <div class="logo-gb"><img src="assets/images/G&B-LOGO.svg" alt="G&B Experts"></div>
+            <div class="header-text">BARISTA QUALITY - CHECK LIST</div>
+            <div class="logo-miscela"><img src="assets/images/MISCELA-DORO-LOGO.svg" alt="Miscela d'Oro"></div>
         </div>
     </header>
 
-    <main class="form-container">
-        <section class="form-section">
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <main class="form-container" id="checklist-form">
+        <section class="form-step active" id="step-1">
             <h1 class="section-title">ΣΤΟΙΧΕΙΑ ΕΠΙΣΚΕΨΗΣ</h1>
             <div class="input-group">
                 <label>ΠΕΛΑΤΗΣ <span class="required">*</span></label>
-                <input type="text" id="customer" placeholder="Όνομα επιχείρησης">
+                <input type="text" id="customer" placeholder="Ονοματεπώνυμο" class="stored">
             </div>
             <div class="input-group">
                 <label>Δ/ΤΙΤΛΟΣ <span class="required">*</span></label>
-                <input type="text" id="title" placeholder="Διακριτικός τίτλος">
+                <input type="text" id="title" placeholder="Επωνυμία" class="stored">
             </div>
             <div class="input-group">
                 <label>ΕΠΑΦΗ ΜΕ <span class="required">*</span></label>
-                <input type="text" id="contact" placeholder="Όνομα Barista">
+                <input type="text" id="contact" placeholder="Συμπλήρωσε" class="stored">
+            </div>
+            <div class="input-group">
+                <label>ΔΙΕΥΘΥΝΣΗ</label>
+                <input type="text" id="address" placeholder="Συμπλήρωσε" class="stored">
+            </div>
+            <div class="input-group">
+                <label>ΤΗΛΕΦΩΝΟ</label>
+                <input type="text" id="phone" placeholder="Συμπλήρωσε" class="stored">
             </div>
             <div class="info-grid">
                 <div class="info-item">
@@ -51,59 +54,149 @@
             </div>
         </section>
 
-        <section class="form-section">
-            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ</h1>
-            
+        <section class="form-step" id="step-2">
+            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Α)</h1>
+            <h3>ΔΟΣΗ ΜΥΛΟΥ</h3>
             <div class="measurements-grid">
-                <div class="input-group">
-                    <label>ΠΙΕΣΗ ΑΝΤΛΙΑΣ (bar)</label>
-                    <input type="text" placeholder="π.χ. 9 bar">
-                </div>
-                <div class="input-group">
-                    <label>ΔΟΣΗ ΜΥΛΟΥ (gr)</label>
-                    <input type="text" placeholder="Γραμμάρια">
-                </div>
+                <div class="input-group"><label>STANDARD</label><input type="text" id="dose-std" class="stored"></div>
+                <div class="input-group"><label>ΕΛΕΓΧΟΣ</label><input type="text" id="dose-check" class="stored"></div>
             </div>
-
-            <div class="check-item">
-                <span>ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</span>
-                <div class="toggle-group">
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'yes')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'no')">ΟΧΙ</button>
-                </div>
-            </div>
-
-            <div class="check-item">
-                <span>ΛΑΣΤΙΧΑ</span>
-                <div class="toggle-group">
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'yes')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'no')">ΟΧΙ</button>
-                </div>
-            </div>
-
             <div class="input-group">
                 <label>ΕΠΕΜΒΑΣΗ</label>
-                <select class="custom-select">
+                <select id="dose-action" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="clean">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
-                    <option value="chem">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
-                    <option value="replace">ΑΝΤΙΚ/ΣΗ</option>
+                    <option value="ΥΠΟΧΡ. ΚΑΘΑΡ.">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
+                    <option value="ΚΑΘΑΡ ΜΕ ΦΑΡΜ.">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
+                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
+                </select>
+            </div>
+            <h3>ΠΙΕΣΗ ΑΝΤΛΙΑΣ</h3>
+            <div class="measurements-grid">
+                <div class="input-group"><label>STANDARD</label><input type="text" id="pump-std" value="9 bar" class="stored"></div>
+                <div class="input-group"><label>ΕΛΕΓΧΟΣ</label><input type="text" id="pump-check" placeholder="... bar" class="stored"></div>
+            </div>
+            <div class="input-group">
+                <label>ΕΠΕΜΒΑΣΗ</label>
+                <select id="pump-action" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="NAI">NAI</option>
+                    <option value="OXI">OXI</option>
                 </select>
             </div>
         </section>
 
-        <div class="info-grid" style="margin-top: 30px;">
-            <div class="info-item">
+        <section class="form-step" id="step-3">
+            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
+            <div class="check-item">
+                <span>ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</span>
+                <select id="showers" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="ΥΠΟΧΡ. ΚΑΘΑΡ.">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
+                    <option value="ΚΑΘΑΡ ΜΕ ΦΑΡΜ.">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
+                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
+                </select>
+            </div>
+            <div class="check-item">
+                <span>ΛΑΣΤΙΧΑ</span>
+                <select id="gaskets" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="ΚΑΛΑ">ΚΑΛΑ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
+                </select>
+            </div>
+            <div class="input-group" style="margin-top:20px">
+                <label>ΓΕΥΣΗ ΝΕΡΟΥ</label>
+                <select id="water-taste" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="form-step" id="step-4">
+            <h1 class="section-title">ΛΟΙΠΕΣ ΕΠΕΜΒΑΣΕΙΣ</h1>
+            <div class="check-item">
+                <span>ΜΗΧΑΝΗ ΚΑΦΕ - ΚΑΘΑΡΙΣΜΟΣ</span>
+                <div class="toggle-group" data-id="toggle-1">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
+            </div>
+            <div class="check-item">
+                <span>ΡΥΘΜΙΣΗ ΔΟΣΕΩΝ</span>
+                <div class="toggle-group" data-id="toggle-2">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
+            </div>
+            <div class="check-item">
+                <span>ΕΛΕΓΧΟΣ ΑΠΟΧΕΤΕΥΣΗΣ</span>
+                <div class="toggle-group" data-id="toggle-3">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-step" id="step-5">
+            <h1 class="section-title">ΑΝΑΛΥΣΗ ΦΛΙΤΖΑΝΙΟΥ</h1>
+            <div class="input-group">
+                <label>ΟΠΤΙΚΗ</label>
+                <select id="visual" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
+                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>ΓΕΥΣΤΙΚΗ</label>
+                <select id="taste" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
+                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ</label>
+                <textarea id="actions" class="stored" placeholder="Συμπλήρωσε"></textarea>
+            </div>
+
+            <div class="signature-section">
+                <div class="sig-wrapper">
+                    <label>BARISTA G&B Experts</label>
+                    <canvas id="sig-canvas-tech" class="sig-canvas"></canvas>
+                    <button type="button" class="clear-sig" onclick="clearSig('tech')">Καθαρισμός</button>
+                </div>
+                <div class="sig-wrapper">
+                    <label>ΓΙΑ ΤΟΝ ΠΕΛΑΤΗ</label>
+                    <canvas id="sig-canvas-client" class="sig-canvas"></canvas>
+                    <button type="button" class="clear-sig" onclick="clearSig('client')">Καθαρισμός</button>
+                </div>
+            </div>
+
+            <div class="info-item" style="margin-top:20px">
                 <label>ΩΡΑ ΑΝΑΧΩΡΗΣΗΣ</label>
                 <div id="departure-time" class="auto-field">--:--</div>
             </div>
+        </section>
+
+        <div class="nav-buttons">
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Πίσω</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">Επόμενο</button>
         </div>
     </main>
 
-    <footer>
-        <p>Copyright (c) 2026 G&B Experts. All rights reserved. Confidential and Proprietary.</p>
-    </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
