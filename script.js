@@ -1,3 +1,4 @@
+
 let currentStep = 0;
 const steps = document.querySelectorAll(".form-step");
 const progressBar = document.getElementById("progress-bar");
@@ -23,38 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function showStep(n) {
-    // Εμφάνιση της σωστής ενότητας
-    steps.forEach((step, idx) => {
-        step.classList.toggle("active", idx === n);
-    });
-
-    // Ενημέρωση του Stepper (κύκλοι)
-    const stepperItems = document.querySelectorAll(".stepper-item");
-    stepperItems.forEach((item, idx) => {
-        item.classList.remove("active", "completed");
-        
-        if (idx < n) {
-            item.classList.add("completed"); // Προηγούμενα βήματα
-        } else if (idx === n) {
-            item.classList.add("active");    // Τρέχον βήμα
-        }
-    });
-
-    // Διαχείριση κουμπιών Πίσω/Επόμενο
+    steps[n].className = "form-step active";
     if (n == 0) {
-        document.getElementById("prevBtn").style.visibility = "hidden";
+        document.getElementById("prevBtn").style.display = "none";
     } else {
-        document.getElementById("prevBtn").style.visibility = "visible";
+        document.getElementById("prevBtn").style.display = "inline";
     }
     
     if (n == (steps.length - 1)) {
         document.getElementById("nextBtn").innerHTML = "ΟΛΟΚΛΗΡΩΣΗ & PDF";
-        document.getElementById("nextBtn").style.backgroundColor = "var(--success)";
     } else {
         document.getElementById("nextBtn").innerHTML = "Επόμενο";
-        document.getElementById("nextBtn").style.backgroundColor = "var(--gb-blue)";
     }
-}
     
     // Update Progress Bar
     let pct = ((n + 1) / steps.length) * 100;
