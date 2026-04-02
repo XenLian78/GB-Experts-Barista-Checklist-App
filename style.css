@@ -1,90 +1,51 @@
 :root {
     --gb-blue: #1b79be;
     --success: #28a745;
-    --danger: #dc3545;
     --white: #ffffff;
-    --gray-bg: #f4f7f9;
 }
 
-body {
-    font-family: -apple-system, system-ui, sans-serif;
-    margin: 0;
-    background-color: var(--white);
-    padding-bottom: 80px;
+/* ... προηγούμενα στυλ ... */
+
+.signature-wrapper {
+    border: 2px dashed #ccc;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    touch-action: none; /* Απαραίτητο για το iPad */
 }
 
-header {
-    border-bottom: 3px solid var(--gb-blue);
-    padding: 10px 20px;
+#signature-pad {
+    width: 100%;
+    height: 200px;
+    display: block;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-content img { height: 40px; }
-
-.form-container { padding: 20px; max-width: 600px; margin: 0 auto; }
-
-.section-title {
-    background-color: var(--gb-blue);
+.btn-clear {
+    background: #666;
     color: white;
+    border: none;
     padding: 8px 15px;
-    font-size: 1rem;
-    margin: 25px 0 15px 0;
     border-radius: 4px;
+    font-size: 12px;
 }
 
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-
-input[type="text"], .custom-select {
+.btn-main {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-.required { color: red; }
-
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.auto-field { padding: 12px; background: #eee; border-radius: 6px; text-align: center; font-weight: bold; }
-
-/* Στυλ για τα κουμπιά ΝΑΙ/ΟΧΙ */
-.check-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.toggle-group { display: flex; gap: 10px; }
-
-.btn-toggle {
-    padding: 10px 20px;
-    border: 2px solid #ccc;
-    background: white;
+    background: var(--gb-blue);
+    color: white;
+    border: none;
+    padding: 20px;
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 8px;
+    margin-top: 30px;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(27, 121, 190, 0.3);
 }
 
-.btn-toggle.active-yes { background-color: var(--success); color: white; border-color: var(--success); }
-.btn-toggle.active-no { background-color: var(--danger); color: white; border-color: var(--danger); }
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    background: white;
-    font-size: 10px;
-    color: var(--gb-blue);
-    border-top: 1px solid #eee;
+/* Κρύβουμε το κουμπί όταν τυπώνεται το PDF */
+@media print {
+    .no-print, .btn-main, .btn-clear {
+        display: none !important;
+    }
 }
