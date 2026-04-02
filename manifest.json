@@ -1,0 +1,17 @@
+
+{
+  "short_name": "G&B Checklist",
+  "name": "G&B Experts Barista Checklist",
+  "icons": [
+    {
+      "src": "assets/images/G&B-LOGO.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "./",
+  "theme_color": "#1b79be"
+}
