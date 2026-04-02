@@ -1,1 +1,66 @@
 
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G&B Experts Checklist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-gb">
+                <img src="assets/images/G&B-LOGO.svg" alt="G&B Experts">
+            </div>
+            <div class="logo-miscela">
+                <img src="assets/images/MISCELA-DORO-LOGO.svg" alt="Miscela d'Oro">
+            </div>
+        </div>
+    </header>
+
+    <main class="form-container">
+        <h1 class="section-title">ΣΤΟΙΧΕΙΑ ΕΠΙΣΚΕΨΗΣ</h1>
+        
+        <div class="input-group">
+            <label>ΠΕΛΑΤΗΣ <span class="required">*</span></label>
+            <input type="text" id="customer" placeholder="Συμπληρώστε με το χέρι">
+        </div>
+
+        <div class="input-group">
+            <label>Δ/ΤΙΤΛΟΣ <span class="required">*</span></label>
+            <input type="text" id="title" placeholder="Συμπληρώστε με το χέρι">
+        </div>
+
+        <div class="input-group">
+            <label>ΕΠΑΦΗ ΜΕ <span class="required">*</span></label>
+            <input type="text" id="contact" placeholder="Όνομα Barista / Υπευθύνου">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <label>ΗΜΕΡ/ΝΙΑ</label>
+                <div id="current-date" class="auto-field">--/--/----</div>
+            </div>
+            <div class="info-item">
+                <label>ΩΡΑ ΑΦΙΞΗΣ</label>
+                <div id="arrival-time" class="auto-field">--:--</div>
+            </div>
+        </div>
+
+        <div class="info-grid" style="margin-top: 15px;">
+            <div class="info-item">
+                <label>ΩΡΑ ΑΝΑΧΩΡΗΣΗΣ</label>
+                <div id="departure-time" class="auto-field">--:--</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright (c) 2026 G&B Experts. All rights reserved. Confidential and Proprietary.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
