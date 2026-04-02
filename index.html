@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G&B Experts Checklist</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
-<body>
+<body id="app-content">
     <header>
         <div class="header-content">
             <div class="logo-gb">
@@ -23,16 +24,8 @@
         <section class="form-section">
             <h1 class="section-title">ΣΤΟΙΧΕΙΑ ΕΠΙΣΚΕΨΗΣ</h1>
             <div class="input-group">
-                <label>ΠΕΛΑΤΗΣ <span class="required">*</span></label>
-                <input type="text" id="customer" placeholder="Όνομα επιχείρησης">
-            </div>
-            <div class="input-group">
-                <label>Δ/ΤΙΤΛΟΣ <span class="required">*</span></label>
-                <input type="text" id="title" placeholder="Διακριτικός τίτλος">
-            </div>
-            <div class="input-group">
-                <label>ΕΠΑΦΗ ΜΕ <span class="required">*</span></label>
-                <input type="text" id="contact" placeholder="Όνομα Barista">
+                <label>ΠΕΛΑΤΗΣ *</label>
+                <input type="text" id="customer">
             </div>
             <div class="info-grid">
                 <div class="info-item">
@@ -48,51 +41,31 @@
 
         <section class="form-section">
             <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ</h1>
-            
-            <div class="measurements-grid">
-                <div class="input-group">
-                    <label>ΠΙΕΣΗ ΑΝΤΛΙΑΣ (bar)</label>
-                    <input type="text" placeholder="π.χ. 9 bar">
-                </div>
-                <div class="input-group">
-                    <label>ΔΟΣΗ ΜΥΛΟΥ (gr)</label>
-                    <input type="text" placeholder="Γραμμάρια">
-                </div>
-            </div>
-
             <div class="check-item">
-                <span>ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</span>
+                <span>ΚΑΘΑΡΙΣΜΟΣ ΜΗΧΑΝΗΣ</span>
                 <div class="toggle-group">
                     <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'yes')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'no')">ΟΧΙ</button>
                 </div>
-            </div>
-
-            <div class="check-item">
-                <span>ΛΑΣΤΙΧΑ</span>
-                <div class="toggle-group">
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'yes')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="toggleBtn(this, 'no')">ΟΧΙ</button>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>ΕΠΕΜΒΑΣΗ</label>
-                <select class="custom-select">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="clean">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
-                    <option value="chem">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
-                    <option value="replace">ΑΝΤΙΚ/ΣΗ</option>
-                </select>
             </div>
         </section>
 
-        <div class="info-grid" style="margin-top: 30px;">
+        <section class="form-section no-print">
+            <h1 class="section-title">ΥΠΟΓΡΑΦΗ ΠΕΛΑΤΗ</h1>
+            <div class="signature-wrapper">
+                <canvas id="signature-pad"></canvas>
+            </div>
+            <button type="button" class="btn-clear" onclick="clearSignature()">Καθαρισμός</button>
+        </section>
+
+        <div class="info-grid" style="margin-top: 20px;">
             <div class="info-item">
                 <label>ΩΡΑ ΑΝΑΧΩΡΗΣΗΣ</label>
                 <div id="departure-time" class="auto-field">--:--</div>
             </div>
         </div>
+
+        <button type="button" id="btn-generate" class="btn-main" onclick="generatePDF()">ΟΛΟΚΛΗΡΩΣΗ & ΕΞΑΓΩΓΗ PDF</button>
     </main>
 
     <footer>
