@@ -24,30 +24,82 @@ header {
 .logo-gb img, .logo-miscela img { height: 45px; }
 .header-text { color: var(--gb-blue); font-weight: 800; font-size: 1.1rem; text-align: center; flex: 1; }
 
-/* Progress Bar */
-.progress-container { width: 100%; height: 8px; background: #eee; }
-.progress-bar { width: 20%; height: 100%; background: var(--gb-blue); transition: 0.3s; }
-
-.form-container { padding: 20px; max-width: 800px; margin: 0 auto; }
-.form-step { display: none; }
-.form-step.active { display: block; animation: fadeIn 0.4s; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.section-title {
-    background: var(--gb-blue); color: white; padding: 12px;
-    border-radius: 6px; font-size: 1.2rem; margin-bottom: 20px;
+/* Stepper Styling - Progress bar */
+.stepper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+    max-width: 800px;
+    padding: 0 20px;
+    position: relative;
 }
 
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
-
-input[type="text"], textarea, .custom-select {
-    width: 100%; padding: 15px; border: 1px solid #ccc;
-    border-radius: 8px; font-size: 1rem; box-sizing: border-box;
+/* Η γραμμή που συνδέει τους κύκλους */
+.stepper-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: #ddd;
+    z-index: 0;
 }
 
-textarea { height: 100px; resize: none; }
+.stepper-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    z-index: 1;
+}
+
+.step-counter {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #999;
+    transition: all 0.4s ease;
+    background-color: white;
+}
+
+.step-name {
+    font-size: 10px;
+    margin-top: 8px;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Ενεργό Βήμα */
+.stepper-item.active .step-counter {
+    border-color: var(--gb-blue);
+    color: var(--gb-blue);
+    transform: scale(1.1);
+}
+
+.stepper-item.active .step-name {
+    color: var(--gb-blue);
+}
+
+/* Ολοκληρωμένο Βήμα */
+.stepper-item.completed .step-counter {
+    background-color: var(--gb-blue);
+    border-color: var(--gb-blue);
+    color: #fff;
+}
+
+.stepper-item.completed .step-name {
+    color: #333;
+}
 
 /* Χρώματα Dropdown */
 .custom-select { background-color: var(--bg-pink); transition: 0.3s; }
