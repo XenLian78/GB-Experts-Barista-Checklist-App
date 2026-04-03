@@ -4,13 +4,18 @@
   "name": "G&B Experts Barista Checklist",
   "icons": [
     {
+      "src": "assets/images/apple-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "assets/images/G&B-LOGO.svg",
       "type": "image/svg+xml",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
   ],
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
