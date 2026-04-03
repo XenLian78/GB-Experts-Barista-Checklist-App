@@ -171,38 +171,68 @@ function loadSavedData() {
     });
 }
 
-// PDF Export
+// ΥΠΕΡ-ΒΕΛΤΙΣΤΟΠΟΙΗΜΕΝΗ ΛΕΙΤΟΥΡΓΙΑ PDF
 async function finishAndExport() {
+    // Ώρα αναχώρησης
     const now = new Date();
     document.getElementById('departure-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
 
     alert("Δημιουργία PDF... Παρακαλώ περιμένετε.");
 
-    steps.forEach(s => s.classList.add("active"));
+    // 1. Προετοιμασία UI για λήψη της "φωτογραφίας"
+    window.scrollTo(0, 0);
+    steps.forEach(s => {
+        s.style.animation = "none"; // Απενεργοποίηση animation για να φανούν άμεσα
+        s.classList.add("active");
+    });
+    
     document.querySelector(".nav-buttons").style.display = "none";
     document.querySelector(".progress-container").style.display = "none";
 
+    // 2. Δίνουμε ελάχιστο χρόνο στον browser να εμφανίσει όλα τα πεδία πριν φωτογραφίσει (κρίσιμο για το iPad)
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     try {
-        const canvas = await html2canvas(document.body, { scale: 2 });
-        const imgData = canvas.toDataURL('image/png');
+        // Χρησιμοποιούμε κλίμακα 1.5 για ταχύτητα & μνήμη. Και scrollY 0 για να μην κοπεί τίποτα
+        const canvas = await html2canvas(document.body, { 
+            scale: 1.5,
+            useCORS: true,
+            scrollY: 0,
+            windowHeight: document.documentElement.scrollHeight
+        });
+        
+        // Το JPEG μορφότυπο μειώνει τον χρόνο δημιουργίας στο 1/10 σε σχέση με το PNG
+        const imgData = canvas.toDataURL('image/jpeg', 0.8);
         
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        // 3. Υπολογισμός διαστάσεων - Εδώ λύνεται το κόψιμο στη μέση της σελίδας
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const pdfWidth = 210; // Standard A4 Width (mm)
+        const pdfHeight = (imgHeight * pdfWidth) / imgWidth;
 
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        // Ορίζουμε δυναμικό ύψος σελίδας αντί για το κλασικό A4, ώστε να χωράει ΟΛΗ η λίστα σε μία συνεχόμενη ροή
+        const pdf = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [pdfWidth, pdfHeight]
+        });
+
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         pdf.save(`Checklist_${document.getElementById('customer').value || 'Report'}.pdf`);
     } catch (err) {
         console.error("Σφάλμα δημιουργίας PDF: ", err);
         alert("Υπήρξε πρόβλημα κατά την εξαγωγή του PDF.");
     }
 
+    // 4. Επαναφορά του UI στην τελική οθόνη (6)
     steps.forEach((s, idx) => {
+        s.style.animation = ""; // Επαναφορά css animations
         if (idx === steps.length - 1) s.classList.add("active");
         else s.classList.remove("active");
     });
+    
     document.querySelector(".nav-buttons").style.display = "flex";
     document.querySelector(".progress-container").style.display = "block";
 }
