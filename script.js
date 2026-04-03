@@ -7,19 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Ημερομηνία & Ώρα Άφιξης
     const now = new Date();
-    document.getElementById('current-date').innerText = now.toLocaleDateString('el-GR');
-    document.getElementById('arrival-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
+    if(document.getElementById('current-date')) {
+        document.getElementById('current-date').innerText = now.toLocaleDateString('el-GR');
+        document.getElementById('arrival-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
+    }
 
     // 2. Αρχικοποίηση Υπογραφών
     const canvasTech = document.getElementById('sig-canvas-tech');
     const canvasClient = document.getElementById('sig-canvas-client');
-    sigPadTech = new SignaturePad(canvasTech);
-    sigPadClient = new SignaturePad(canvasClient);
+    if(canvasTech && canvasClient) {
+        sigPadTech = new SignaturePad(canvasTech);
+        sigPadClient = new SignaturePad(canvasClient);
+    }
 
     function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
         [canvasTech, canvasClient].forEach(canvas => {
-            if (canvas.offsetWidth > 0) {
+            if (canvas && canvas.offsetWidth > 0) {
                 const pad = canvas.id === 'sig-canvas-tech' ? sigPadTech : sigPadClient;
                 const data = pad ? pad.toData() : null;
                 canvas.width = canvas.offsetWidth * ratio;
@@ -32,23 +36,22 @@ document.addEventListener("DOMContentLoaded", () => {
     window.resizeCanvas = resizeCanvas;
     window.addEventListener("resize", resizeCanvas);
 
-    // 3. Φόρτωση δεδομένων & Έλεγχος χρωμάτων
     loadSavedData();
     document.querySelectorAll('.custom-select').forEach(select => updateSelectColor(select));
 
-    // 4. Εμφάνιση πρώτου βήματος
     showStep(currentStep);
 });
 
 function showStep(n) {
+    if(!steps) return;
     steps.forEach((step, index) => {
         step.classList.toggle("active", index === n);
     });
 
-    // Διόρθωση εμφάνισης κουμπιού "Πίσω"
+    // Διόρθωση: Απόκρυψη κουμπιού Πίσω στην Οθόνη 1
     const prevBtn = document.getElementById("prevBtn");
     if (n === 0) {
-        prevBtn.style.visibility = "hidden"; // Χρησιμοποιούμε visibility για να μην κουνιέται το Next
+        prevBtn.style.visibility = "hidden";
     } else {
         prevBtn.style.visibility = "visible";
     }
@@ -68,9 +71,8 @@ function showStep(n) {
 }
 
 function nextPrev(n) {
-    // Αν πάμε μπροστά, κάνουμε έλεγχο εγκυρότητας
     if (n === 1 && !validateForm()) {
-        alert("Παρακαλώ συμπληρώστε τα υποχρεωτικά πεδία με το κόκκινο περίγραμμα.");
+        alert("Παρακαλώ συμπληρώστε τα υποχρεωτικά πεδία.");
         return false;
     }
 
@@ -88,10 +90,10 @@ function nextPrev(n) {
 function validateForm() {
     let valid = true;
     let currentStepEl = steps[currentStep];
-    let requiredInputs = currentStepEl.querySelectorAll("input[required]");
-
-    requiredInputs.forEach(input => {
-        if (input.value.trim() === "") {
+    let inputs = currentStepEl.querySelectorAll("input[required]");
+    
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
             input.style.border = "2px solid var(--danger)";
             valid = false;
         } else {
@@ -100,20 +102,6 @@ function validateForm() {
     });
     return valid;
 }
-
-// Real-time έλεγχος για να φεύγει το κόκκινο πλαίσιο καθώς πληκτρολογείς
-document.addEventListener("input", (e) => {
-    if (e.target.hasAttribute("required")) {
-        if (e.target.value.trim() !== "") {
-            e.target.style.border = "1px solid #ccc";
-        } else {
-            e.target.style.border = "2px solid var(--danger)";
-        }
-    }
-    if (e.target.classList.contains("stored")) {
-        saveCurrentData();
-    }
-});
 
 function updateSelectColor(select) {
     select.classList.toggle("completed", select.value !== "");
@@ -139,9 +127,7 @@ function saveCurrentData() {
         data[el.id] = el.value;
     });
     document.querySelectorAll(".toggle-group").forEach(el => {
-        if (el.getAttribute('data-value')) {
-            data[el.getAttribute('data-id')] = el.getAttribute('data-value');
-        }
+        data[el.getAttribute('data-id')] = el.getAttribute('data-value');
     });
     localStorage.setItem("gb_checklist_draft", JSON.stringify(data));
 }
@@ -157,12 +143,11 @@ function loadSavedData() {
 
     document.querySelectorAll(".toggle-group").forEach(el => {
         let id = el.getAttribute('data-id');
-        let val = data[id];
-        if (val) {
-            el.setAttribute('data-value', val);
+        if (data[id]) {
+            el.setAttribute('data-value', data[id]);
             el.querySelectorAll('button').forEach(btn => {
-                if (btn.innerText === val) {
-                    btn.classList.add(val === 'NAI' ? 'active-yes' : 'active-no');
+                if (btn.innerText === data[id]) {
+                    btn.classList.add(data[id] === 'NAI' ? 'active-yes' : 'active-no');
                 }
             });
         }
@@ -188,13 +173,13 @@ async function finishAndExport() {
 
     try {
         const canvas = await html2canvas(document.body, { 
-            scale: 2,
+            scale: 1.5,
             useCORS: true,
             scrollY: 0,
             windowHeight: document.documentElement.scrollHeight
         });
         
-        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+        const imgData = canvas.toDataURL('image/jpeg', 0.8);
         const { jsPDF } = window.jspdf;
         
         const imgWidth = canvas.width;
