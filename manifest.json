@@ -6,10 +6,11 @@
     {
       "src": "assets/images/G&B-LOGO.svg",
       "type": "image/svg+xml",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
