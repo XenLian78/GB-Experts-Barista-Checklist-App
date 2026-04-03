@@ -49,6 +49,12 @@ h3 {
     padding-bottom: 5px;
 }
 
+/* ΝΕΑ ΚΛΑΣΗ ΓΙΑ ΕΝΤΟΝΑ ΜΠΛΕ ΓΡΑΜΜΑΤΑ */
+.gb-label-blue {
+    color: var(--gb-blue) !important;
+    font-weight: bold !important;
+}
+
 .input-group { margin-bottom: 15px; }
 .input-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
 
@@ -58,27 +64,39 @@ input[type="text"], textarea, .custom-select {
 }
 
 input::placeholder, textarea::placeholder { color: #999; opacity: 1; }
-
 textarea { height: 100px; resize: none; }
 
-/* Χρώματα Dropdown */
 .custom-select { background-color: var(--bg-pink); transition: 0.3s; }
 .custom-select.completed { background-color: var(--bg-green); }
 
 .measurements-grid, .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
 .auto-field { padding: 15px; background: #f0f0f0; border-radius: 8px; font-weight: bold; text-align: center; border: 1px solid #ddd; }
 
-.check-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+/* Έγινε μετατροπή σε flex-column για να μπαίνουν τα κουμπιά NAI/OXI κάτω από τα μακροσκελή κείμενα (Οθόνη 5) */
+.check-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 15px 0; 
+    border-bottom: 1px solid #eee; 
+    gap: 12px;
+}
 
-/* Signature Pads */
+/* Signature Pads - Προστέθηκε touch-action: none για να δουλεύει στο κινητό */
 .signature-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
 .sig-wrapper { text-align: center; }
 .sig-wrapper label { font-weight: bold; color: #444; display: block; margin-bottom: 10px; }
 .sig-wrapper small { font-weight: normal; font-size: 0.8rem; color: #777; }
-.sig-canvas { border: 2px dashed #ccc; border-radius: 8px; width: 100%; height: 150px; background: #fff; }
+.sig-canvas { 
+    border: 2px dashed #ccc; 
+    border-radius: 8px; 
+    width: 100%; 
+    height: 150px; 
+    background: #fff; 
+    touch-action: none; 
+}
 .clear-sig { margin-top: 5px; padding: 5px 10px; font-size: 12px; }
 
-/* Buttons Navigation */
 .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
 button {
     padding: 15px 30px; border-radius: 8px; border: none;
@@ -87,7 +105,6 @@ button {
 #nextBtn { background: var(--gb-blue); color: white; }
 #prevBtn { background: #ccc; color: #333; }
 
-/* Toggles */
-.btn-toggle { padding: 10px 20px; background: #fff; border: 1px solid #ccc; margin-left: 5px; }
+.btn-toggle { padding: 10px 20px; background: #fff; border: 1px solid #ccc; margin-right: 5px; }
 .btn-toggle.active-yes { background: var(--success); color: white; border-color: var(--success); }
 .btn-toggle.active-no { background: var(--danger); color: white; border-color: var(--danger); }
