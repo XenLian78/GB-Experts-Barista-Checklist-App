@@ -9,21 +9,34 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('current-date').innerText = now.toLocaleDateString('el-GR');
     document.getElementById('arrival-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
 
-    // 2. Initialize Signatures
-    sigPadTech = new SignaturePad(document.getElementById('sig-canvas-tech'));
-    sigPadClient = new SignaturePad(document.getElementById('sig-canvas-client'));
+    // 2. Initialize Signatures Container
+    const canvasTech = document.getElementById('sig-canvas-tech');
+    const canvasClient = document.getElementById('sig-canvas-client');
+    sigPadTech = new SignaturePad(canvasTech);
+    sigPadClient = new SignaturePad(canvasClient);
 
-    // Προσαρμογή μεγέθους canvas
+    // Προσαρμογή μεγέθους canvas (Βελτιωμένο ώστε να αποθηκεύει την υπογραφή αν γίνει resize)
     function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        [document.getElementById('sig-canvas-tech'), document.getElementById('sig-canvas-client')].forEach(canvas => {
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
+        [canvasTech, canvasClient].forEach(canvas => {
+            // Κάνει resize μόνο αν ο καμβάς είναι ορατός
+            if (canvas.offsetWidth > 0) {
+                const pad = canvas.id === 'sig-canvas-tech' ? sigPadTech : sigPadClient;
+                const data = pad ? pad.toData() : null;
+                
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+                
+                if (pad && data && data.length > 0) {
+                    pad.fromData(data);
+                }
+            }
         });
     }
+    // Εκθέτουμε τη συνάρτηση globally για να την καλέσουμε όταν εμφανιστεί η Οθόνη 6
+    window.resizeCanvas = resizeCanvas; 
     window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
 
     // 3. Load Saved Data from LocalStorage
     loadSavedData();
@@ -52,6 +65,11 @@ function showStep(n) {
     if (n === (steps.length - 1)) {
         document.getElementById("nextBtn").innerHTML = "ΟΛΟΚΛΗΡΩΣΗ & PDF";
         document.getElementById("nextBtn").style.backgroundColor = "var(--success)";
+        
+        // ΛΥΣΗ ΓΙΑ SIGNATURE PAD: Κάνουμε resize τον καμβά ΜΟΛΙΣ εμφανιστεί η Οθόνη 6
+        setTimeout(() => {
+            if(window.resizeCanvas) window.resizeCanvas();
+        }, 50);
     } else {
         document.getElementById("nextBtn").innerHTML = "Επόμενο";
         document.getElementById("nextBtn").style.backgroundColor = "var(--gb-blue)";
@@ -155,13 +173,11 @@ function loadSavedData() {
 
 // PDF Export
 async function finishAndExport() {
-    // Ωρα αναχώρησης
     const now = new Date();
     document.getElementById('departure-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
 
     alert("Δημιουργία PDF... Παρακαλώ περιμένετε.");
 
-    // Εμφανίζουμε όλα τα steps για να τα "φωτογραφίσει" το html2canvas
     steps.forEach(s => s.classList.add("active"));
     document.querySelector(".nav-buttons").style.display = "none";
     document.querySelector(".progress-container").style.display = "none";
@@ -183,7 +199,6 @@ async function finishAndExport() {
         alert("Υπήρξε πρόβλημα κατά την εξαγωγή του PDF.");
     }
 
-    // Επαναφορά UI
     steps.forEach((s, idx) => {
         if (idx === steps.length - 1) s.classList.add("active");
         else s.classList.remove("active");
