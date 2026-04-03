@@ -107,8 +107,8 @@
                 <div class="input-group"><label>Θερμοκρασία Boiler</label><input type="text" id="flow-boiler" placeholder="Συμπλήρωσε" class="stored"></div>
             </div>
 
-            <div class="check-item">
-                <span>ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</span>
+            <div class="input-group" style="margin-top:20px">
+                <label class="gb-label-blue">ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</label>
                 <select id="showers" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
                     <option value="ΥΠΟΧΡ. ΚΑΘΑΡ.">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
@@ -117,8 +117,8 @@
                 </select>
             </div>
             
-            <div class="check-item">
-                <span>ΛΑΣΤΙΧΑ</span>
+            <div class="input-group">
+                <label class="gb-label-blue">ΛΑΣΤΙΧΑ</label>
                 <select id="gaskets" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
                     <option value="ΚΑΛΑ">ΚΑΛΑ</option>
@@ -141,8 +141,8 @@
         <section class="form-step" id="step-4">
             <h1 class="section-title">ΕΛΕΓΧΟΣ ΝΕΡΟΥ</h1>
             
-            <div class="check-item">
-                <span>ΦΙΛΤΡΟ ΝΕΡΟΥ</span>
+            <div class="input-group">
+                <label class="gb-label-blue">ΦΙΛΤΡΟ ΝΕΡΟΥ</label>
                 <select id="water-filter" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
                     <option value="NAI">NAI</option>
@@ -159,7 +159,7 @@
             </div>
 
             <div class="input-group" style="margin-top:20px">
-                <label>ΓΕΥΣΗ ΝΕΡΟΥ</label>
+                <label class="gb-label-blue">ΓΕΥΣΗ ΝΕΡΟΥ</label>
                 <select id="water-taste" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
                     <option value="ΚΑΛΗ">ΚΑΛΗ</option>
@@ -172,35 +172,35 @@
         <section class="form-step" id="step-5">
             <h1 class="section-title">ΛΟΙΠΕΣ ΕΠΕΜΒΑΣΕΙΣ</h1>
             <div class="check-item">
-                <span>ΜΗΧΑΝΗ ΚΑΦΕ - ΕΛΕΓΧΟΣ ΚΑΘΑΡΙΣΜΟΥ ΦΙΛΤΡΩΝ-ΚΟΥΠΩΝ</span>
+                <span class="gb-label-blue">ΜΗΧΑΝΗ ΚΑΦΕ - ΕΛΕΓΧΟΣ ΚΑΘΑΡΙΣΜΟΥ ΦΙΛΤΡΩΝ-ΚΟΥΠΩΝ</span>
                 <div class="toggle-group" data-id="toggle-1">
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
                 </div>
             </div>
             <div class="check-item">
-                <span>ΜΥΛΟΣ ΚΑΦΕ - ΡΥΘΜΙΣΗ</span>
+                <span class="gb-label-blue">ΜΥΛΟΣ ΚΑΦΕ - ΡΥΘΜΙΣΗ</span>
                 <div class="toggle-group" data-id="toggle-2">
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
                 </div>
             </div>
             <div class="check-item">
-                <span>ΡΥΘΜΙΣΗ ΔΟΣΕΩΝ</span>
+                <span class="gb-label-blue">ΡΥΘΜΙΣΗ ΔΟΣΕΩΝ</span>
                 <div class="toggle-group" data-id="toggle-3">
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
                 </div>
             </div>
             <div class="check-item">
-                <span>ΕΛΕΓΧΟΣ ΣΩΛΗΝΑ ΑΠΟΧΕΤΕΥΣΗΣ</span>
+                <span class="gb-label-blue">ΕΛΕΓΧΟΣ ΣΩΛΗΝΑ ΑΠΟΧΕΤΕΥΣΗΣ</span>
                 <div class="toggle-group" data-id="toggle-4">
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
                 </div>
             </div>
             <div class="check-item">
-                <span>ΑΛΛΑΓΗ ΜΑΧΑΙΡΙΩΝ ΒΛΑΒΗ</span>
+                <span class="gb-label-blue">ΑΛΛΑΓΗ ΜΑΧΑΙΡΙΩΝ ΒΛΑΒΗ</span>
                 <div class="toggle-group" data-id="toggle-5">
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
