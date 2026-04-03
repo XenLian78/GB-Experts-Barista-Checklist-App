@@ -6,6 +6,7 @@
     <title>G&B Experts Checklist</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1b79be">
 </head>
 <body>
     <header>
@@ -90,7 +91,6 @@
 
         <section class="form-step" id="step-3">
             <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
-            
             <h3>ΜΥΛΟΣ ΑΛΕΣΗΣ</h3>
             <div class="measurements-grid">
                 <div class="input-group"><label>ΓΡΑΜΜΑΡΙΑ</label><input type="text" id="grind-grams" placeholder="Συμπλήρωσε" class="stored"></div>
@@ -140,7 +140,6 @@
 
         <section class="form-step" id="step-4">
             <h1 class="section-title">ΕΛΕΓΧΟΣ ΝΕΡΟΥ</h1>
-            
             <div class="input-group">
                 <label class="gb-label-blue">ΦΙΛΤΡΟ ΝΕΡΟΥ</label>
                 <select id="water-filter" class="custom-select stored" onchange="updateSelectColor(this)">
@@ -149,7 +148,6 @@
                     <option value="OXI">OXI</option>
                 </select>
             </div>
-
             <h3>ΜΕΤΡΗΤΗΣ ΦΙΛΤΡΟΥ</h3>
             <div class="measurements-grid">
                 <div class="input-group"><label>STANDARD (TDS)</label><input type="text" id="filter-std" placeholder="120-150 ppm" class="stored"></div>
@@ -157,7 +155,6 @@
                 <div class="input-group"><label>PH (Standard)</label><input type="text" id="filter-ph-std" placeholder="6-8" class="stored"></div>
                 <div class="input-group"><label>PH μέτρηση</label><input type="text" id="filter-ph" placeholder="Συμπλήρωσε" class="stored"></div>
             </div>
-
             <div class="input-group" style="margin-top:20px">
                 <label class="gb-label-blue">ΓΕΥΣΗ ΝΕΡΟΥ</label>
                 <select id="water-taste" class="custom-select stored" onchange="updateSelectColor(this)">
@@ -270,5 +267,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker Registered'))
+                .catch(err => console.log('Service Worker Failed', err));
+            });
+        }
+    </script>
 </body>
 </html>
