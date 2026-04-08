@@ -48,7 +48,6 @@ function showStep(n) {
         step.classList.toggle("active", index === n);
     });
 
-    // Διόρθωση: Απόκρυψη κουμπιού Πίσω στην Οθόνη 1
     const prevBtn = document.getElementById("prevBtn");
     if (n === 0) {
         prevBtn.style.visibility = "hidden";
@@ -154,6 +153,14 @@ function loadSavedData() {
     });
 }
 
+// ΝΕΑ ΣΥΝΑΡΤΗΣΗ: Χειροκίνητη εκκαθάριση όλων των δεδομένων
+function clearAllData() {
+    if(confirm("Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα δεδομένα και να ξεκινήσετε από την αρχή;")) {
+        localStorage.removeItem("gb_checklist_draft");
+        window.location.reload();
+    }
+}
+
 async function finishAndExport() {
     const now = new Date();
     document.getElementById('departure-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
@@ -168,6 +175,10 @@ async function finishAndExport() {
     
     document.querySelector(".nav-buttons").style.display = "none";
     document.querySelector(".progress-container").style.display = "none";
+
+    // Κρύβουμε προσωρινά το κουμπί εκκαθάρισης ώστε να μη φαίνεται στο PDF
+    const clearBtn = document.querySelector(".btn-clear-all");
+    if(clearBtn) clearBtn.style.display = "none";
 
     await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -195,16 +206,23 @@ async function finishAndExport() {
 
         pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         pdf.save(`Checklist_${document.getElementById('customer').value || 'Report'}.pdf`);
+        
+        // ΝΕΟ: Αυτόματος καθαρισμός μετά την επιτυχή έκδοση του PDF
+        localStorage.removeItem("gb_checklist_draft");
+        alert("Η αναφορά ολοκληρώθηκε επιτυχώς! Η εφαρμογή τώρα θα καθαρίσει για την επόμενη επίσκεψη.");
+        window.location.reload(); // Κάνει refresh για να αδειάσει τελείως το UI
+
     } catch (err) {
         console.error(err);
-        alert("Σφάλμα PDF.");
+        alert("Σφάλμα κατά τη δημιουργία του PDF.");
+        
+        // Επαναφορά εμφάνισης σε περίπτωση σφάλματος
+        steps.forEach((s, idx) => {
+            s.style.animation = "";
+            s.classList.toggle("active", idx === steps.length - 1);
+        });
+        document.querySelector(".nav-buttons").style.display = "flex";
+        document.querySelector(".progress-container").style.display = "block";
+        if(clearBtn) clearBtn.style.display = "flex";
     }
-
-    steps.forEach((s, idx) => {
-        s.style.animation = "";
-        s.classList.toggle("active", idx === steps.length - 1);
-    });
-    
-    document.querySelector(".nav-buttons").style.display = "flex";
-    document.querySelector(".progress-container").style.display = "block";
 }
