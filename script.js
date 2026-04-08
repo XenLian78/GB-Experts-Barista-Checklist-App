@@ -64,7 +64,7 @@ function showStep(n) {
         nextBtn.style.backgroundColor = "var(--success)";
         setTimeout(() => { if(window.resizeCanvas) window.resizeCanvas(); }, 100);
     } else {
-        nextBtn.innerHTML = "Επόμενο";
+        nextBtn.innerHTML = "Επόμενη";
         nextBtn.style.backgroundColor = "var(--gb-blue)";
     }
 
