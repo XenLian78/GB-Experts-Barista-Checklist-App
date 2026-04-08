@@ -102,7 +102,7 @@ button {
     font-weight: bold; font-size: 1rem; cursor: pointer;
 }
 #nextBtn { background: var(--gb-blue); color: white; }
-#prevBtn { background: #ccc; color: #333; }
+#prevBtn { background: "var(--gb-blue)"; color: #333; }
 
 .btn-toggle { padding: 10px 20px; background: #fff; border: 1px solid #ccc; margin-right: 5px; }
 .btn-toggle.active-yes { background: var(--success); color: white; border-color: var(--success); }
