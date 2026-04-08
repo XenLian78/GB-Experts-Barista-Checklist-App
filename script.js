@@ -1,3 +1,4 @@
+
 let currentStep = 0;
 let steps, progressBar, sigPadTech, sigPadClient;
 
@@ -51,8 +52,10 @@ function showStep(n) {
     const prevBtn = document.getElementById("prevBtn");
     if (n === 0) {
         prevBtn.style.visibility = "hidden";
+        prevBtn.style.display = "none"; // Βοηθάει στην καλύτερη στοίχιση του nav-left
     } else {
         prevBtn.style.visibility = "visible";
+        prevBtn.style.display = "block";
     }
 
     const nextBtn = document.getElementById("nextBtn");
@@ -153,7 +156,6 @@ function loadSavedData() {
     });
 }
 
-// ΝΕΑ ΣΥΝΑΡΤΗΣΗ: Χειροκίνητη εκκαθάριση όλων των δεδομένων
 function clearAllData() {
     if(confirm("Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα δεδομένα και να ξεκινήσετε από την αρχή;")) {
         localStorage.removeItem("gb_checklist_draft");
@@ -223,6 +225,6 @@ async function finishAndExport() {
         });
         document.querySelector(".nav-buttons").style.display = "flex";
         document.querySelector(".progress-container").style.display = "block";
-        if(clearBtn) clearBtn.style.display = "flex";
+        if(clearBtn) clearBtn.style.display = ""; // Επαναφέρει την default συμπεριφορά
     }
 }
