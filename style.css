@@ -1,3 +1,4 @@
+
 :root {
     --gb-blue: #1b79be;
     --success: #28a745;
@@ -95,7 +96,7 @@ textarea { height: 100px; resize: none; }
 }
 .clear-sig { margin-top: 5px; padding: 5px 10px; font-size: 12px; }
 
-.nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+.nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; align-items: center; }
 button {
     padding: 15px 30px; border-radius: 8px; border: none;
     font-weight: bold; font-size: 1rem; cursor: pointer;
@@ -107,16 +108,8 @@ button {
 .btn-toggle.active-yes { background: var(--success); color: white; border-color: var(--success); }
 .btn-toggle.active-no { background: var(--danger); color: white; border-color: var(--danger); }
 
-/* ΝΕΟ: Στυλ για το Κουμπί Εκκαθάρισης */
+/* Κουμπί Εκκαθάρισης (Κληρονομεί πλέον το μέγεθος από το γενικό button tag) */
 .btn-clear-all {
     background-color: var(--danger);
     color: white;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
