@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="el">
 <head>
@@ -32,8 +33,6 @@
         <section class="form-step active" id="step-1">
             <h1 class="section-title">ΣΤΟΙΧΕΙΑ ΕΠΙΣΚΕΨΗΣ</h1>
             
-            <button type="button" class="btn-clear-all" onclick="clearAllData()">🗑️ ΕΚΚΑΘΑΡΙΣΗ ΦΟΡΜΑΣ</button>
-
             <div class="input-group">
                 <label>ΠΕΛΑΤΗΣ <span class="required">*</span></label>
                 <input type="text" id="customer" placeholder="Ονοματεπώνυμο" class="stored" required>
@@ -267,7 +266,10 @@
         </section>
 
         <div class="nav-buttons">
-            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Πίσω</button>
+            <div class="nav-left" style="display: flex; gap: 10px; align-items: center;">
+                <button type="button" class="btn-clear-all" onclick="clearAllData()">ΕΚΚΑΘΑΡΙΣΗ ΦΟΡΜΑΣ</button>
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Πίσω</button>
+            </div>
             <button type="button" id="nextBtn" onclick="nextPrev(1)">Επόμενο</button>
         </div>
     </main>
