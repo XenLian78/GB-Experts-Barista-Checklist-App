@@ -100,11 +100,10 @@
             </div>
             <div class="input-group">
                 <label>ΕΠΕΜΒΑΣΗ</label>
-                <select id="pump-action" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="NAI">NAI</option>
-                    <option value="OXI">OXI</option>
-                </select>
+                <div class="toggle-group" data-id="toggle-pump">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
             </div>
 
             <h3>ΘΕΡΜΟΚΡΑΣΙΑ ΝΕΡΟΥ</h3>
@@ -168,11 +167,10 @@
             <h1 class="section-title">ΕΛΕΓΧΟΣ ΝΕΡΟΥ</h1>
             <div class="input-group">
                 <label class="gb-label-blue">ΦΙΛΤΡΟ ΝΕΡΟΥ</label>
-                <select id="water-filter" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="NAI">NAI</option>
-                    <option value="OXI">OXI</option>
-                </select>
+                <div class="toggle-group" data-id="toggle-water-filter">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
             </div>
             <h3>ΜΕΤΡΗΤΗΣ ΦΙΛΤΡΟΥ</h3>
             <div class="measurements-grid">
