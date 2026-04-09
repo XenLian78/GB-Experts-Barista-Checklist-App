@@ -108,7 +108,7 @@ button {
 .btn-toggle.active-yes { background: var(--success); color: white; border-color: var(--success); }
 .btn-toggle.active-no { background: var(--danger); color: white; border-color: var(--danger); }
 
-/* Κουμπί Εκκαθάρισης (Κληρονομεί πλέον το μέγεθος από το γενικό button tag) */
+/* Κουμπί Εκκαθάρισης */
 .btn-clear-all {
     background-color: var(--danger);
     color: white;
