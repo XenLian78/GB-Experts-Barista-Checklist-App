@@ -52,7 +52,7 @@ function showStep(n) {
     const prevBtn = document.getElementById("prevBtn");
     if (n === 0) {
         prevBtn.style.visibility = "hidden";
-        prevBtn.style.display = "none";
+        prevBtn.style.display = "none"; 
     } else {
         prevBtn.style.visibility = "visible";
         prevBtn.style.display = "block";
