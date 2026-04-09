@@ -52,7 +52,7 @@ function showStep(n) {
     const prevBtn = document.getElementById("prevBtn");
     if (n === 0) {
         prevBtn.style.visibility = "hidden";
-        prevBtn.style.display = "none"; // Βοηθάει στην καλύτερη στοίχιση του nav-left
+        prevBtn.style.display = "none";
     } else {
         prevBtn.style.visibility = "visible";
         prevBtn.style.display = "block";
@@ -178,7 +178,6 @@ async function finishAndExport() {
     document.querySelector(".nav-buttons").style.display = "none";
     document.querySelector(".progress-container").style.display = "none";
 
-    // Κρύβουμε προσωρινά το κουμπί εκκαθάρισης ώστε να μη φαίνεται στο PDF
     const clearBtn = document.querySelector(".btn-clear-all");
     if(clearBtn) clearBtn.style.display = "none";
 
@@ -209,22 +208,20 @@ async function finishAndExport() {
         pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         pdf.save(`Checklist_${document.getElementById('customer').value || 'Report'}.pdf`);
         
-        // ΝΕΟ: Αυτόματος καθαρισμός μετά την επιτυχή έκδοση του PDF
         localStorage.removeItem("gb_checklist_draft");
         alert("Η αναφορά ολοκληρώθηκε επιτυχώς! Η εφαρμογή τώρα θα καθαρίσει για την επόμενη επίσκεψη.");
-        window.location.reload(); // Κάνει refresh για να αδειάσει τελείως το UI
+        window.location.reload(); 
 
     } catch (err) {
         console.error(err);
         alert("Σφάλμα κατά τη δημιουργία του PDF.");
         
-        // Επαναφορά εμφάνισης σε περίπτωση σφάλματος
         steps.forEach((s, idx) => {
             s.style.animation = "";
             s.classList.toggle("active", idx === steps.length - 1);
         });
         document.querySelector(".nav-buttons").style.display = "flex";
         document.querySelector(".progress-container").style.display = "block";
-        if(clearBtn) clearBtn.style.display = ""; // Επαναφέρει την default συμπεριφορά
+        if(clearBtn) clearBtn.style.display = ""; 
     }
 }
