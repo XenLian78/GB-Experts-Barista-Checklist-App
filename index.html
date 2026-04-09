@@ -67,6 +67,7 @@
 
         <section class="form-step" id="step-2">
             <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Α)</h1>
+            
             <h3>ΔΟΣΗ ΜΥΛΟΥ</h3>
             <div class="measurements-grid">
                 <div class="input-group"><label>STANDARD</label><input type="text" id="dose-std" placeholder="Συμπλήρωσε" class="stored"></div>
@@ -74,13 +75,23 @@
             </div>
             <div class="input-group">
                 <label>ΕΠΕΜΒΑΣΗ</label>
-                <select id="dose-action" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="ΥΠΟΧΡ. ΚΑΘΑΡ.">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
-                    <option value="ΚΑΘΑΡ ΜΕ ΦΑΡΜ.">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
-                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
-                </select>
+                <div class="toggle-group" data-id="toggle-dose">
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                </div>
             </div>
+            
+            <h3>ΜΥΛΟΣ ΑΛΕΣΗΣ</h3>
+            <div class="measurements-grid">
+                <div class="input-group"><label>ΓΡΑΜΜΑΡΙΑ</label><input type="text" id="grind-grams" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΧΡΟΝΟΣ ΚΟΠΗΣ</label><input type="text" id="grind-time" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΕΝΔΕΙΞΗ ΔΟΣΕΩΝ</label><input type="text" id="grind-doses" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΑΛΛΑΓΗ ΜΑΧ/ΙΩΝ ΩΡΕΣ</label><input type="text" id="grind-blades" placeholder="Συμπλήρωσε" class="stored"></div>
+            </div>
+        </section>
+
+        <section class="form-step" id="step-3">
+            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
             
             <h3>ΠΙΕΣΗ ΑΝΤΛΙΑΣ</h3>
             <div class="measurements-grid">
@@ -95,19 +106,8 @@
                     <option value="OXI">OXI</option>
                 </select>
             </div>
-        </section>
 
-        <section class="form-step" id="step-3">
-            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
-            <h3>ΜΥΛΟΣ ΑΛΕΣΗΣ</h3>
-            <div class="measurements-grid">
-                <div class="input-group"><label>ΓΡΑΜΜΑΡΙΑ</label><input type="text" id="grind-grams" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΧΡΟΝΟΣ ΚΟΠΗΣ</label><input type="text" id="grind-time" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΕΝΔΕΙΞΗ ΔΟΣΕΩΝ</label><input type="text" id="grind-doses" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΑΛΛΑΓΗ ΜΑΧ/ΙΩΝ ΩΡΕΣ</label><input type="text" id="grind-blades" placeholder="Συμπλήρωσε" class="stored"></div>
-            </div>
-
-            <h3>ΡΟΗ ΝΕΡΟΥ</h3>
+            <h3>ΘΕΡΜΟΚΡΑΣΙΑ ΝΕΡΟΥ</h3>
             <div class="measurements-grid">
                 <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ GR1</label><input type="text" id="flow-gr1" placeholder="Συμπλήρωσε" class="stored"></div>
                 <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ GR2</label><input type="text" id="flow-gr2" placeholder="Συμπλήρωσε" class="stored"></div>
@@ -116,11 +116,11 @@
             </div>
 
             <div class="input-group" style="margin-top:20px">
-                <label class="gb-label-blue">ΝΤΟΥΖΙΕΡΕΣ / ΣΙΤΕΣ</label>
+                <label class="gb-label-blue">ΝΤΟΥΖΙΕΡΕΣ / ΦΙΛΤΡΑ</label>
                 <select id="showers" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="ΥΠΟΧΡ. ΚΑΘΑΡ.">ΥΠΟΧΡ. ΚΑΘΑΡ.</option>
-                    <option value="ΚΑΘΑΡ ΜΕ ΦΑΡΜ.">ΚΑΘΑΡ ΜΕ ΦΑΡΜ.</option>
+                    <option value="ΚΑΘΑΡΕΣ">ΚΑΘΑΡΕΣ</option>
+                    <option value="ΒΡΩΜΙΚΕΣ">ΒΡΩΜΙΚΕΣ</option>
                     <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
                 </select>
             </div>
@@ -139,10 +139,28 @@
             <div class="measurements-grid">
                 <div class="input-group"><label>GR1 ΠΡΙΝ</label><input type="text" id="ext-gr1-before" placeholder="Συμπλήρωσε" class="stored"></div>
                 <div class="input-group"><label>GR1 ΜΕΤΑ</label><input type="text" id="ext-gr1-after" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>GR2 ΠΡΙΝ</label><input type="text" id="ext-gr2-before" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>GR2 ΜΕΤΑ</label><input type="text" id="ext-gr2-after" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>GR3 ΠΡΙΝ</label><input type="text" id="ext-gr3-before" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>GR3 ΜΕΤΑ</label><input type="text" id="ext-gr3-after" placeholder="Συμπλήρωσε" class="stored"></div>
+            </div>
+
+            <h3>ΑΝΑΛΥΣΗ ΦΛΙΤΖΑΝΙΟΥ</h3>
+            <div class="input-group">
+                <label>ΟΠΤΙΚΗ</label>
+                <select id="visual" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
+                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>ΓΕΥΣΤΙΚΗ</label>
+                <select id="taste" class="custom-select stored" onchange="updateSelectColor(this)">
+                    <option value="">ΕΠΙΛΕΞΕ</option>
+                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
+                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
+                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
+                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                </select>
             </div>
         </section>
 
@@ -158,7 +176,7 @@
             </div>
             <h3>ΜΕΤΡΗΤΗΣ ΦΙΛΤΡΟΥ</h3>
             <div class="measurements-grid">
-                <div class="input-group"><label>STANDARD (TDS)</label><input type="text" id="filter-std" placeholder="120-150 ppm" class="stored"></div>
+                <div class="input-group"><label>STANDARD (TDS)</label><input type="text" id="filter-std" placeholder="150-250 μ/S" class="stored"></div>
                 <div class="input-group"><label>TDS</label><input type="text" id="filter-tds" placeholder="Συμπλήρωσε" class="stored"></div>
                 <div class="input-group"><label>PH (Standard)</label><input type="text" id="filter-ph-std" placeholder="6-8" class="stored"></div>
                 <div class="input-group"><label>PH μέτρηση</label><input type="text" id="filter-ph" placeholder="Συμπλήρωσε" class="stored"></div>
@@ -214,28 +232,6 @@
         </section>
 
         <section class="form-step" id="step-6">
-            <h1 class="section-title">ΑΝΑΛΥΣΗ ΦΛΙΤΖΑΝΙΟΥ</h1>
-            <div class="input-group">
-                <label>ΟΠΤΙΚΗ</label>
-                <select id="visual" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
-                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
-                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
-                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>ΓΕΥΣΤΙΚΗ</label>
-                <select id="taste" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
-                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
-                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
-                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
-                </select>
-            </div>
-            
             <h1 class="section-title">ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ & ΣΧΟΛΙΑ</h1>
             <div class="input-group">
                 <label>ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ-ΠΡΟΤΑΣΕΙΣ ΠΡΟΣ ΤΟΝ ΠΕΛΑΤΗ</label>
@@ -266,11 +262,12 @@
         </section>
 
         <div class="nav-buttons">
-            <div class="nav-left" style="display: flex; gap: 10px; align-items: center;">
-                <button type="button" class="btn-clear-all" onclick="clearAllData()">ΕΚΚΑΘΑΡΙΣΗ ΦΟΡΜΑΣ</button>
+            <button type="button" class="btn-clear-all" onclick="clearAllData()">ΕΚΚΑΘΑΡΙΣΗ ΦΟΡΜΑΣ</button>
+            
+            <div class="nav-right" style="display: flex; gap: 10px; align-items: center;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Προηγούμενη</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Επόμενη</button>
             </div>
-            <button type="button" id="nextBtn" onclick="nextPrev(1)">Επόμενη</button>
         </div>
     </main>
 
