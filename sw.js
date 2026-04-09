@@ -1,3 +1,4 @@
+
 const CACHE_NAME = 'gb-checklist-v1';
 const ASSETS = [
   './',
