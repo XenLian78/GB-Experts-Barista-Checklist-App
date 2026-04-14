@@ -1,10 +1,9 @@
-
 {
   "short_name": "G&B Checklist",
   "name": "G&B Experts Barista Checklist",
   "icons": [
     {
-      "src": "assets/images/apple-icon-180x180.png",
+      "src": "assets/images/icon-180.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"
