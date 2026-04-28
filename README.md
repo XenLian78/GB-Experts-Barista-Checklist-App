@@ -3,6 +3,9 @@
 ## 🚀 Overview
 This is a Progressive Web App (PWA) designed to digitize and automate the operational auditing process for Barista trainers and technicians. It eliminates paper forms and ensures data consistency through a structured digital workflow.
 
+## 🌐 Live Preview
+You can view the app here: [https://gb-experts-barista-checklist-app.vercel.app/]
+
 ## 🛠️ Tech Stack
 * **Frontend:** HTML5, CSS3, JavaScript.
 * **Offline Capabilities:** Service Workers & Web App Manifest for full PWA support.
