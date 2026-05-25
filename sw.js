@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gb-checklist-v3';
+const CACHE_NAME = 'gb-checklist-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -8,9 +8,9 @@ const ASSETS = [
   './assets/images/G&B-LOGO.svg',
   './assets/images/MISCELA-DORO-LOGO.svg',
   './assets/images/icon-180.png',
-  './js/signature_pad.umd.min.js',
-  './js/html2canvas.min.js',
-  './js/jspdf.umd.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
 ];
 
 self.addEventListener('install', (e) => {
