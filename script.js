@@ -183,6 +183,15 @@ async function finishAndExport() {
 
     await new Promise(resolve => setTimeout(resolve, 800));
 
+    // Αν είμαστε offline, κρύβουμε τα λογότυπα για να μην σπάει το PDF
+    const isOffline = !navigator.onLine;
+    const logoGb = document.querySelector('.logo-gb');
+    const logoMiscela = document.querySelector('.logo-miscela');
+    if (isOffline) {
+        if (logoGb) logoGb.style.visibility = 'hidden';
+        if (logoMiscela) logoMiscela.style.visibility = 'hidden';
+    }
+
     try {
         const canvas = await html2canvas(document.body, { 
             scale: 1.5,
@@ -207,6 +216,12 @@ async function finishAndExport() {
 
         pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         pdf.save(`Checklist_${document.getElementById('customer').value || 'Report'}.pdf`);
+
+        // Επαναφορά λογοτύπων αν τα κρύψαμε
+        if (isOffline) {
+            if (logoGb) logoGb.style.visibility = '';
+            if (logoMiscela) logoMiscela.style.visibility = '';
+        }
         
         localStorage.removeItem("gb_checklist_draft");
         alert("Η αναφορά ολοκληρώθηκε επιτυχώς! Η εφαρμογή τώρα θα καθαρίσει για την επόμενη επίσκεψη.");
@@ -214,6 +229,13 @@ async function finishAndExport() {
 
     } catch (err) {
         console.error(err);
+
+        // Επαναφορά λογοτύπων σε περίπτωση σφάλματος
+        if (isOffline) {
+            if (logoGb) logoGb.style.visibility = '';
+            if (logoMiscela) logoMiscela.style.visibility = '';
+        }
+
         alert("Σφάλμα κατά τη δημιουργία του PDF.");
         
         steps.forEach((s, idx) => {
