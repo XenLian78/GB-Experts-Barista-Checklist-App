@@ -49,8 +49,8 @@
                 <input type="text" id="address" placeholder="Συμπλήρωσε" class="stored">
             </div>
             <div class="input-group">
-                <label>ΤΗΛΕΦΩΝΟ</label>
-                <input type="text" id="phone" placeholder="Συμπλήρωσε" class="stored">
+                <label>ΤΕΧΝΙΚΟΣ</label>
+                <input type="text" id="technician" placeholder="Συμπλήρωσε" class="stored">
             </div>
             <div class="info-grid">
                 <div class="info-item">
@@ -68,69 +68,32 @@
             <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Α)</h1>
             
             <h3>ΔΟΣΗ ΜΥΛΟΥ</h3>
-            <div class="measurements-grid">
-                <div class="input-group"><label>STANDARD</label><input type="text" id="dose-std" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΕΛΕΓΧΟΣ</label><input type="text" id="dose-check" placeholder="Συμπλήρωσε" class="stored"></div>
-            </div>
-            <div class="input-group">
-                <label>ΕΠΕΜΒΑΣΗ</label>
-                <div class="toggle-group" data-id="toggle-dose">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+            <div class="row-flex">
+                <div class="input-group flex-grow">
+                    <label>ΕΛΕΓΧΟΣ</label>
+                    <input type="text" id="dose-check" placeholder="Συμπλήρωσε" class="stored">
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-dose">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
                 </div>
             </div>
             
             <h3>ΜΥΛΟΣ ΑΛΕΣΗΣ</h3>
             <div class="measurements-grid">
                 <div class="input-group"><label>ΧΡΟΝΟΣ ΚΟΠΗΣ</label><input type="text" id="grind-grams" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΕΛΕΓΧΟΣ</label><input type="text" id="grind-time" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-grind">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
+                </div>
                 <div class="input-group"><label>ΕΝΔΕΙΞΗ ΔΟΣΕΩΝ</label><input type="text" id="grind-doses" placeholder="Συμπλήρωσε" class="stored"></div>
                 <div class="input-group"><label>ΑΛΛΑΓΗ ΜΑΧ/ΙΩΝ ΩΡΕΣ</label><input type="text" id="grind-blades" placeholder="Συμπλήρωσε" class="stored"></div>
-            </div>
-        </section>
-
-        <section class="form-step" id="step-3">
-            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
-            
-            <h3>ΠΙΕΣΗ ΑΝΤΛΙΑΣ</h3>
-            <div class="measurements-grid">
-                <div class="input-group"><label>STANDARD</label><input type="text" id="pump-std" value="9 bar" readonly></div>
-                <div class="input-group"><label>ΕΛΕΓΧΟΣ</label><input type="text" id="pump-check" placeholder="Συμπλήρωσε" class="stored"></div>
-            </div>
-            <div class="input-group">
-                <label>ΕΠΕΜΒΑΣΗ</label>
-                <div class="toggle-group" data-id="toggle-pump">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
-                </div>
-            </div>
-
-            <h3>ΘΕΡΜΟΚΡΑΣΙΑ ΝΕΡΟΥ</h3>
-            <div class="measurements-grid">
-                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ GR1</label><input type="text" id="flow-gr1" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ GR2</label><input type="text" id="flow-gr2" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ GR3</label><input type="text" id="flow-gr3" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>Θερμοκρασία Boiler</label><input type="text" id="flow-boiler" placeholder="Συμπλήρωσε" class="stored"></div>
-            </div>
-
-            <div class="input-group" style="margin-top:20px">
-                <label class="gb-label-blue">ΝΤΟΥΖΙΕΡΕΣ / ΦΙΛΤΡΑ</label>
-                <select id="showers" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="ΚΑΘΑΡΕΣ">ΚΑΘΑΡΕΣ</option>
-                    <option value="ΒΡΩΜΙΚΕΣ">ΒΡΩΜΙΚΕΣ</option>
-                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
-                </select>
-            </div>
-            
-            <div class="input-group">
-                <label class="gb-label-blue">ΛΑΣΤΙΧΑ</label>
-                <select id="gaskets" class="custom-select stored" onchange="updateSelectColor(this)">
-                    <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="ΚΑΛΑ">ΚΑΛΑ</option>
-                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
-                    <option value="ΑΝΤΙΚ/ΣΗ">ΑΝΤΙΚ/ΣΗ</option>
-                </select>
             </div>
 
             <h3>ΧΡΟΝΟΣ ΑΠΟΣΤΑΞΗΣ</h3>
@@ -154,11 +117,37 @@
                 <label>ΓΕΥΣΤΙΚΗ</label>
                 <select id="taste" class="custom-select stored" onchange="updateSelectColor(this)">
                     <option value="">ΕΠΙΛΕΞΕ</option>
-                    <option value="Π.ΚΑΛΗ">Π.ΚΑΛΗ</option>
-                    <option value="ΚΑΛΗ">ΚΑΛΗ</option>
-                    <option value="ΜΕΤΡΙΑ">ΜΕΤΡΙΑ</option>
-                    <option value="ΚΑΚΗ">ΚΑΚΗ</option>
+                    <option value="ΓΛΥΚΟΣ">ΓΛΥΚΟΣ</option>
+                    <option value="ΟΞΙΝΟΣ">ΟΞΙΝΟΣ</option>
+                    <option value="ΚΑΥΤΟΣ">ΚΑΥΤΟΣ</option>
                 </select>
+            </div>
+        </section>
+
+        <section class="form-step" id="step-3">
+            <h1 class="section-title">ΤΕΧΝΙΚΟΣ ΕΛΕΓΧΟΣ (Β)</h1>
+            
+            <h3>ΠΙΕΣΗ ΑΝΤΛΙΑΣ</h3>
+            <div class="row-flex">
+                <div class="input-group flex-grow">
+                    <label>ΕΛΕΓΧΟΣ</label>
+                    <input type="text" id="pump-check" placeholder="Συμπλήρωσε" class="stored">
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-pump">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3>ΘΕΡΜΟΚΡΑΣΙΑ ΝΕΡΟΥ</h3>
+            <div class="measurements-grid">
+                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ ΔΕΞΙΟΥ</label><input type="text" id="flow-gr1" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ ΑΡΙΣΤΕΡΟΥ</label><input type="text" id="flow-gr2" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ ΜΕΣΑΙΟΥ</label><input type="text" id="flow-gr3" placeholder="Συμπλήρωσε" class="stored"></div>
+                <div class="input-group"><label>ΘΕΡΜΟΚΡΑΣΙΑ BOILER</label><input type="text" id="flow-boiler" placeholder="Συμπλήρωσε" class="stored"></div>
             </div>
         </section>
 
@@ -171,11 +160,10 @@
                     <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
                 </div>
             </div>
-            <h3>ΜΕΤΡΗΤΗΣ ΦΙΛΤΡΟΥ</h3>
             <div class="measurements-grid">
-                <div class="input-group"><label>STANDARD (TDS)</label><input type="text" id="pump-std" value="150-250 μ/S" readonly></div>
+                <div class="input-group"><label>STANDARD (TDS)</label><input type="text" id="filter-std" value="150-250 μ/S" readonly></div>
                 <div class="input-group"><label>TDS</label><input type="text" id="filter-tds" placeholder="Συμπλήρωσε" class="stored"></div>
-                <div class="input-group"><label>PH (Standard)</label><input type="text" id="pump-std" value="6-8" readonly></div>
+                <div class="input-group"><label>PH (Standard)</label><input type="text" id="filter-ph-std" value="6-8" readonly></div>
                 <div class="input-group"><label>PH μέτρηση</label><input type="text" id="filter-ph" placeholder="Συμπλήρωσε" class="stored"></div>
             </div>
             <div class="input-group" style="margin-top:20px">
@@ -191,39 +179,98 @@
 
         <section class="form-step" id="step-5">
             <h1 class="section-title">ΛΟΙΠΕΣ ΕΠΕΜΒΑΣΕΙΣ</h1>
-            <div class="check-item">
-                <span class="gb-label-blue">ΜΗΧΑΝΗ ΚΑΦΕ - ΕΛΕΓΧΟΣ ΚΑΘΑΡΙΣΜΟΥ ΦΙΛΤΡΩΝ-ΚΟΥΠΩΝ</span>
-                <div class="toggle-group" data-id="toggle-1">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+
+            <div class="check-item-row">
+                <div class="input-group flex-grow">
+                    <label class="gb-label-blue">ΕΛΕΓΧΟΣ SHOWER SCREEN</label>
+                    <select id="shower-screen" class="custom-select stored" onchange="updateSelectColor(this)">
+                        <option value="">ΕΠΙΛΕΞΕ</option>
+                        <option value="ΚΑΘΑΡΕΣ">ΚΑΘΑΡΕΣ</option>
+                        <option value="ΒΡΩΜΙΚΕΣ">ΒΡΩΜΙΚΕΣ</option>
+                        <option value="ΑΝΤΙΚΑΤΑΣΤΑΣΗ">ΑΝΤΙΚΑΤΑΣΤΑΣΗ</option>
+                    </select>
                 </div>
-            <!-- </div>
-            <div class="check-item">
-                <span class="gb-label-blue">ΜΥΛΟΣ ΚΑΦΕ - ΡΥΘΜΙΣΗ</span>
-                <div class="toggle-group" data-id="toggle-2">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
-                </div>
-            </div>
-            <div class="check-item">
-                <span class="gb-label-blue">ΡΥΘΜΙΣΗ ΔΟΣΕΩΝ</span>
-                <div class="toggle-group" data-id="toggle-3">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
-                </div> -->
-            </div>
-            <div class="check-item">
-                <span class="gb-label-blue">ΕΛΕΓΧΟΣ ΣΩΛΗΝΑ ΑΠΟΧΕΤΕΥΣΗΣ</span>
-                <div class="toggle-group" data-id="toggle-4">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-shower-screen">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
                 </div>
             </div>
-            <div class="check-item">
-                <span class="gb-label-blue">ΑΛΛΑΓΗ ΜΑΧΑΙΡΙΩΝ ΒΛΑΒΗ</span>
-                <div class="toggle-group" data-id="toggle-5">
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
-                    <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+
+            <div class="check-item-row">
+                <div class="input-group flex-grow">
+                    <label class="gb-label-blue">ΕΛΕΓΧΟΣ GROUP GASKET</label>
+                    <select id="group-gasket" class="custom-select stored" onchange="updateSelectColor(this)">
+                        <option value="">ΕΠΙΛΕΞΕ</option>
+                        <option value="ΜΑΛΑΚΑ">ΜΑΛΑΚΑ</option>
+                        <option value="ΞΕΡΑ">ΞΕΡΑ</option>
+                        <option value="ΑΝΤΙΚΑΤΑΣΤΑΣΗ">ΑΝΤΙΚΑΤΑΣΤΑΣΗ</option>
+                    </select>
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-group-gasket">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-item-row">
+                <div class="input-group flex-grow">
+                    <label class="gb-label-blue">ΕΛΕΓΧΟΣ PORTAFILTER - FILTER BASKET</label>
+                    <select id="portafilter" class="custom-select stored" onchange="updateSelectColor(this)">
+                        <option value="">ΕΠΙΛΕΞΕ</option>
+                        <option value="ΚΑΘΑΡΑ">ΚΑΘΑΡΑ</option>
+                        <option value="ΒΡΩΜΙΚΑ">ΒΡΩΜΙΚΑ</option>
+                        <option value="ΑΝΤΙΚΑΤΑΣΤΑΣΗ">ΑΝΤΙΚΑΤΑΣΤΑΣΗ</option>
+                    </select>
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-portafilter">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-item-row">
+                <div class="input-group flex-grow">
+                    <label class="gb-label-blue">ΕΛΕΓΧΟΣ ΑΠΟΧΕΤΕΥΣΗΣ</label>
+                    <select id="drainage" class="custom-select stored" onchange="updateSelectColor(this)">
+                        <option value="">ΕΠΙΛΕΞΕ</option>
+                        <option value="ΚΑΘΑΡΗ ΡΟΗ">ΚΑΘΑΡΗ ΡΟΗ</option>
+                        <option value="ΒΟΥΛΩΜΕΝΗ">ΒΟΥΛΩΜΕΝΗ</option>
+                    </select>
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-drainage">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-item-row">
+                <div class="input-group flex-grow">
+                    <label class="gb-label-blue">ΜΑΧΑΙΡΙΑ ΜΥΛΟΥ</label>
+                    <select id="grinder-blades" class="custom-select stored" onchange="updateSelectColor(this)">
+                        <option value="">ΕΠΙΛΕΞΕ</option>
+                        <option value="ΚΑΘΑΡΑ">ΚΑΘΑΡΑ</option>
+                        <option value="ΦΘΑΡΜΕΝΑ">ΦΘΑΡΜΕΝΑ</option>
+                        <option value="ΑΝΤΙΚΑΤΑΣΤΑΣΗ">ΑΝΤΙΚΑΤΑΣΤΑΣΗ</option>
+                    </select>
+                </div>
+                <div class="input-group toggle-wrap">
+                    <label>ΕΠΕΜΒΑΣΗ</label>
+                    <div class="toggle-group" data-id="toggle-grinder-blades">
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'NAI')">ΝΑΙ</button>
+                        <button type="button" class="btn-toggle" onclick="setToggle(this, 'OXI')">ΟΧΙ</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -231,11 +278,11 @@
         <section class="form-step" id="step-6">
             <h1 class="section-title">ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ & ΣΧΟΛΙΑ</h1>
             <div class="input-group">
-                <label>ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ-ΠΡΟΤΑΣΕΙΣ ΠΡΟΣ ΤΟΝ ΠΕΛΑΤΗ</label>
+                <label>ΔΙΟΡΘΩΤΙΚΕΣ ΕΝΕΡΓΕΙΕΣ – ΠΑΡΑΤΗΡΗΣΕΙΣ ΠΡΟΣ ΤΟΝ ΠΕΛΑΤΗ</label>
                 <textarea id="actions" class="stored" placeholder="Συμπλήρωσε"></textarea>
             </div>
             <div class="input-group">
-                <label>ΔΙΑΦΟΡΑ ΣΧΟΛΙΑ - ΑΛΛΕΣ ΠΑΡΑΤΗΡΗΣΕΙΣ</label>
+                <label>ΣΧΟΛΙΑ – ΠΑΡΑΤΗΡΗΣΕΙΣ ΚΑΤΑ ΤΟΝ ΕΛΕΓΧΟ</label>
                 <textarea id="comments" class="stored" placeholder="Συμπλήρωσε"></textarea>
             </div>
 
