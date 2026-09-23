@@ -163,6 +163,10 @@ function clearAllData() {
 }
 
 async function finishAndExport() {
+    if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+        alert("Οι βιβλιοθήκες δημιουργίας PDF δεν είναι διαθέσιμες αυτή τη στιγμή.\n\nΑν βρίσκεσαι εκτός σύνδεσης, άνοιξε την εφαρμογή μία φορά με WiFi/δεδομένα ώστε να προ-φορτωθούν, και μετά δοκίμασε ξανά.");
+        return;
+    }
     const now = new Date();
     document.getElementById('departure-time').innerText = now.toLocaleTimeString('el-GR', {hour: '2-digit', minute:'2-digit'});
 
